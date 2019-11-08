@@ -1,5 +1,33 @@
-{{!-- The following component displays Ember's default welcome message. --}}
-{{welcome-page}}
-{{!-- Feel free to remove this! --}}
+<div class="container">
+  <nav class="nav-bar">
+    <div class="nav-bar__logo">
+      {{#link-to "index" class="nav-bar__brand"}}
+      Library App
+      {{/link-to}}
+    </div>
+    <div class="nav-bar__main">
+      <ul class="nav-bar__list">
+        {{#link-to "index" tagName="li" class="nav-bar__list-item nav-bar__list-item--selected"}}
+        <a href="">Home</a>
+        {{/link-to}}
+        {{#link-to "index" tagName="li" class="nav-bar__list-item"}}
+        <a href="">Libraries</a>
+        {{/link-to}}
+        {{#link-to "index" tagName="li" class="nav-bar__list-item"}}
+        <a href="">Authors</a>
+        {{/link-to}}
+        {{#link-to "index" tagName="li" class="nav-bar__list-item nav-bar__list-item--divide"}}
+        <a href="">Books</a>
+        {{/link-to}}
+        {{#link-to "about" tagName="li" class="nav-bar__list-item"}}
+        <a href="">About</a>
+        {{/link-to}}
+        {{#link-to "contact" tagName="li" class="nav-bar__list-item"}}
+        <a href="">Contact</a>
+        {{/link-to}}
+      </ul>
+    </div>
+  </nav>
+  {{outlet}}
+</div>
 
-{{outlet}}

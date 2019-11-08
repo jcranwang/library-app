@@ -1,0 +1,74 @@
+.contact {
+  margin-top: 3rem;
+  color: #333;
+
+  &__title {
+    font-size: 3rem;
+  }
+
+  &__greeting {
+    font-size: 1.4rem;
+    padding: 1rem;
+    background-color: #f5f5f5;
+    border: 1px solid #e3e3e3;
+    border-radius: 5px;
+  }
+
+  &__input-header {
+    font-size: 1.5rem;
+    font-weight: 700;
+  }
+
+  &__input-box {
+    border: 1px solid #e3e3e3;
+    padding: 0.5rem 1rem;
+    width: 50rem;
+    margin-top: 1rem;
+    font-size: 1.5rem;
+    border-radius: 5px;
+
+    &--valid {
+      border: 2px solid #4cae4c;
+
+      &:focus {
+        outline: 2px solid #4cae4c;
+      }
+    }
+  }
+
+  &__send-btn {
+    background-color: #5cb85c;
+    border: 1px solid #4cae4c;
+    color: #fff;
+    font-size: 1.5rem;
+    padding: 1rem 2rem;
+    border-radius: 5px;
+
+    &:hover {
+      background-color: #449d44;
+      border: 1px solid #398439;
+    }
+
+    &:active {
+      outline: none;
+    }
+
+    &:disabled {
+      opacity: 0.7;
+      cursor: not-allowed;
+    }
+  }
+
+  &__response {
+    width: 50rem;
+    background-color: #dff0db;
+    color: #3c763d;
+    padding: 2rem;
+    font-size: 1.5rem;
+    line-height: 2;
+  }
+
+  &__response-head {
+    font-size: 1.8rem;
+  }
+}
