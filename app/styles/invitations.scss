@@ -1,0 +1,25 @@
+.invitation {
+  margin-top: 3rem;
+  color: #333;
+
+  &__title {
+    font-size: 3rem;
+  }
+
+  &__table {
+    table-layout: fixed;
+    width: 100%;
+    font-size: 1.5rem;
+    border: 2px solid lightgrey;
+    border-collapse: collapse;
+
+    th, td {
+      border: 1px solid #333;
+      padding: 1rem;
+    }
+
+    tr:nth-child(odd) {
+      background-color: lightgrey;
+    }
+  }
+}

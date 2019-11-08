@@ -53,5 +53,44 @@
     &--divide {
       margin-right: auto;
     }
+
+    &--dropdown {
+      position: relative;
+    }
+  }
+
+  &__drop-arrow {
+    font-size: 1.2rem;
+  }
+
+  &__dropdown {
+    position: absolute;
+    list-style: none;
+    border: 1px solid #333;
+    background-color: #fff;
+    padding: 1rem 2rem;
+    top: 5rem;
+    border-radius: 5px;
+    line-height: 1.8;
+    visibility: hidden;
+    opacity: 0;
+    transition: all 0.2s;
+  }
+
+  &__dropdown-item {
+    a {
+      text-decoration: none;
+      color: #333;
+      font-size: 1.2rem;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+
+  &__list-item--dropdown:hover &__dropdown {
+    visibility: visible;
+    opacity: 1;
   }
 }
