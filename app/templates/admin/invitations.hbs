@@ -8,22 +8,12 @@
       <th>E-mail</th>
     </thead>
     <tbody>
-      <tr>
-        <td>1234567</td>
-        <td>jayachandranjg@gmail.com</td>
-      </tr>
-      <tr>
-        <td>1234567</td>
-        <td>jayachandranjg@gmail.com</td>
-      </tr>
-      <tr>
-        <td>1234567</td>
-        <td>jayachandranjg@gmail.com</td>
-      </tr>
-      <tr>
-        <td>1234567</td>
-        <td>jayachandranjg@gmail.com</td>
-      </tr>
+      {{#each model as |invitation|}}
+        <tr>
+          <td>{{invitation.id}}</td>
+          <td>{{invitation.email}}</td>
+        </tr>
+      {{/each}}
     </tbody>
   </table>
 </section>
