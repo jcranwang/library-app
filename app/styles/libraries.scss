@@ -1,0 +1,123 @@
+.libraries {
+  margin-top: 3rem;
+  color: $light-black;
+
+  &__title {
+    font-size: 3rem;
+  }
+
+  &__menu {
+    background-color: $light-grey;
+    padding: 1rem;
+    border: 1px solid $dark-grey;
+    display: flex;
+    list-style: none;
+  }
+
+  &__menu-item {
+    padding: 1rem;
+    background-color: $light-blue;
+    margin-left: 2rem;
+    border-radius: 5px;
+    cursor: pointer;
+
+    a {
+      text-decoration: none;
+      //color: #337ab7;
+      color: #fff;
+      font-size: 1.3rem;
+    }
+
+    &:hover {
+      background-color: $dark-blue;
+    }
+
+    &:active {
+      background-color: $light-blue;
+    }
+  }
+
+  &__list-title {
+    font-size: 2.5rem;
+    color: $light-black;
+  }
+
+  &__library-collection {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(30rem, 1fr));
+  }
+
+  &__form-title {
+    font-size: 3rem;
+    color: $light-black;
+  }
+}
+
+.library {
+  background-color: #fff;
+  border: 1px solid $dark-grey;
+  border-radius: 5px;
+
+  &__title {
+    padding: 1rem;
+    background-color: $light-grey;
+    color: $light-black;
+    font-size: 1.5rem;
+    border: 1px solid $dark-grey;
+  }
+
+  &__description {
+    display: flex;
+    flex-direction: column;
+    padding: 2rem 1rem;
+    font-size: 1.3rem;
+    line-height: 2;
+  }
+}
+
+.lib-form {
+  color: $light-black;
+
+  &__input-group {
+    padding: 1rem;
+  }
+
+  &__label {
+    font-size: 1.5rem;
+    font-weight: 600;
+    display: inline-block;
+    text-align: right;
+    width: 7rem;
+    margin-right: 2rem;
+  }
+
+  &__input {
+    padding: 1rem;
+    border: 1px solid $dark-grey;
+    border-radius: 5px;
+    width: 30rem;
+    font-size: 1.5rem;
+  }
+
+  &__btn-create {
+    padding: 1rem;
+    background-color: $light-blue;
+    color: #fff;
+    font-size: 1.3rem;
+    border-radius: 5px;
+    margin-left: 9rem;
+    cursor: pointer;
+
+    &:hover {
+      background-color: $dark-blue;
+    }
+
+    &:active {
+      background-color: $light-blue;
+    }
+
+    &:focus {
+      outline: none;
+    }
+  }
+}

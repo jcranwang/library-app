@@ -1,27 +1,7 @@
-*,
-*:before,
-*:after {
-  margin: 0;
-  border: 0;
-  box-sizing: inherit;
-}
-
-html {
-  font-size: 62.5%;
-}
-
-body {
-  font-family: "Lato", sans-serif;
-  box-sizing: border-box;
-}
-
-.container {
-  max-width: 120rem;
-  margin: 0 auto;
-  padding-top: 2rem;
-}
-
+@import "./variables.scss";
+@import "./global.scss";
 @import "./nav.scss";
 @import "./index.scss";
 @import "./contact.scss";
 @import "./invitations.scss";
+@import "./libraries.scss";

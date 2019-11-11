@@ -1,0 +1,17 @@
+<section class="libraries">
+  <h2 class="libraries__title">
+    Libraries
+  </h2>
+  <br>
+  <ul class="libraries__menu">
+    {{#link-to "libraries.index" class="libraries__menu-item" tagName="li"}}
+    <a href="">List All</a>
+    {{/link-to}}
+    {{#link-to "libraries.new" class="libraries__menu-item" tagName="li"}}
+    <a href="">Add New</a>
+    {{/link-to}}
+  </ul>
+</section>
+<br>
+<br>
+{{outlet}}

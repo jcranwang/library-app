@@ -1,0 +1,296 @@
+Ember Notes
+
+1. Object
+
+	(1)	Define class: use extend() method
+	(2)	Create instances: use create() method
+	(3)	Arrays and objects defined directly on any Ember.Object are shared across all instances of that class.
+		To avoid this behavior, it is encouraged to initialize those arrays and object properties during init(). Doing so ensures each instance will be unique.
+	(4)	Accessing object properties: using JavaScript dot notation. If it is a proxy object, using get() method. Use set() method to set object values.
+	(5)	Use reopen() method to define new properties in a class. reopen() create instance properties. reopenClass() create static properties. Note here static properties only exist inside class object. Instance properties exist inside instance objects.
+	(6)	Computed Properties: define functions as properties. 
+		a. You create one by defining a computed property as a function, which Ember will automatically call when you ask for the property. In computed() method, we need to indicate the properties that this computed property depends on.
+		b. A computed property will only recompute its value when it is consumed. For example, the first time you access the fullName property, the function will be called and the results will be cached. Subsequent access of fullName will read from the cache without calling the function. Changing any of the dependent properties causes the cache to invalidate, so that the computed function runs again on the next access. 
+		c. Multiple dependants on the same object, you have to use object's properties as keys, not object itself.
+		d. Chaining computed properties: You can use computed properties as values to create new computed properties.
+		e. Setting any dependent property will propagate changes through any computed properties that depend on them, all the way down the chain of computed properties you've created.
+		d. Define a setter and getter for computed properties.
+		e. Monitor array data in a computed property.
+		   (a) Use the [] array key to tell the property to update at the right time. When we use list.[], if some changes are made to list (CRUD), these events can be monitored by the computed properties.
+		   (b) To monitor an individual object in the list, we need to use @each key. @each key can also monitor the array as a whole. However, using @each is more expensive than [], so default to [] if you don't actually have to observe property changes on individual members of the array.
+		   (c) Note that @each only works one level deep. You cannot use nested forms like todos.@each.owner.name or todos.@each.owner.@each.name.
+		   (d) macro: filterBy(), map(). Note that we need to import filterBy() and map() macro from "@ember/object/computed"
+
+	(7) Observers. Computed properties are actually a better solution. Observers in Ember are currently synchronous. This means that they will fire as soon as one of the properties they observe changes. Because of this, it is easy to introduce bugs where properties are not yet synchronized
+
+	(8) Bindings. Computed properties is a better solution (Not understand very well, what is one-way binding and what is two-way binding.)
+
+	(9) Enumerables. 
+		a. In order for Ember to observe when you make a change to an enumerable, you need to use special methods that MutableArray provides. For example, if you add an element to an array using the standard JavaScript method push(), Ember will not be able to observe the change, but if you use the enumerable method pushObject(), the change will propagate throughout your application.
+		b. Additionally, to retrieve the first and last objects in an array in an observable fashion, you should use myArray.get('firstObject') and myArray.get('lastObject'), respectively.
+
+
+2. Templating
+
+	(1)	.hbs file. Ember uses handlebar to write html.
+
+	(2)	Types of templates: Route templates and Component templates. A Route template determines what is shown when someone visits a particular URL, like https://guides.emberjs.com/some-route. A Component template has bits of content that can be reused in multiple places throughout the app, like buttons or forms.
+
+	(3)	App entry point: index.html
+
+	(4) Template's context. A template only has access to the data it has been given. This is referred to as the template's "context." For example, to display a property inside a Component's template, it should be defined in the Component's JavaScript file
+
+	(5) Helper functions. Ember Helpers are a way to use JavaScript logic in your templates. For example, you could write a Helper function that capitalizes a word, does some math, converts a currency, or more. A Helper takes in two types of arguments, positional (an array of the positional values passed in the template) or named (an object of the named values passed in the template), which are passed into the function, and should return a value. 
+		3 ways to invoke a helper:
+			a. inline invocation
+			b. nested invocation
+			c. block invocation
+
+	(6) Built-in helpers
+		a. {{get}} helper
+		b. {{let}} helper
+		c. Array helper
+
+	(7)	Conditionals
+		a. {{#if}}
+		b. {{#else}}
+		c. {{#else if}}
+		d. {{#unless}}
+
+	(8)	Displaying a list of items {{#each}}
+
+	(9)	Displaying the keys in an object {{#each-in}}
+
+	(10) Binding Element Attributes
+
+	(11) Links (Not understand well)
+		 a. <LinkTo> component
+
+	(12) Actions
+		 a. {{action}} built-in helper.
+		 b. You can pass action parameters to the action helper.
+	     c. The default action event type is a click event. You can use "on" option to specify what event type you want, you need to use camelCased to specify event name.
+	     d. Use "allowedKeys" property to specify which key can let the event fires.
+	     e. By default, ember action prevents the default browser action. You can specify "preventDefault=false" to prevent ember from preventing browser default actions.
+	     f. You can modify the action's first parameter using "value" property. If no "value" property specifies inside the action, the first parameter will be the event object the browser passes to the handler. (Not understand well)
+	     g. Be careful when you attach actions to non-clickable elements. Some browsers won't execute the associated function.
+
+	(13) Input Helpers
+		 a. Text fields: <Input> component. Specify its properties with "@" symbol.
+		 b. Actions
+		 c. Checkboxes: use <Input> helper with a type of "checkboxes"
+		 d. Binding dynamic attribute. (Not understand very well)
+
+	(14) Development Helpers
+
+	(15) Writing your own helpers
+		 a. If the name of your helper is multi-words, you need to put a dash between these words.
+		 b. Named arguments are passed in as a second parameter of the helper function. You can pass in as many named arguments as you want, all these arguments are added into the second parameter object.
+		 c. Paramters come in as the first arugment, named arguments are came in as the second argument.
+		 d. Class-based helpers: must have a contain() method. Use class-based helpers when your helpers need to access services.
+		 e. Escaping HTML content: protect your application from cross-site scripting attacks(XSS).
+
+
+3. Component
+
+	(1)	Define a component
+		a. Two parts: a JavaScript component file that defines behavior
+					  its accompanying Handlebars template that defines the markup for the ccomponent's UI
+
+		b. {{component}} helper can dynamically pick the component being rendered.
+
+	(2)	The component lifecycle
+		a. didUpdateAttrs: this is called prior to rerender
+		b. didReceiveAttrs: runs after init, also runs on subsequent re-renders
+		c. didInsertElement: runs after a component successfully renders its backing HTML. You can access DOM element in this lifecycle method. This method only triggers once when the component element is first rendered.
+		d. didRender: runs during both render and re-render after the template has rendered and the DOM updated.
+		e. willDestroyElement: runs before the component is taken out of the DOM.
+
+	(3)	Passing properties to a component
+		a. Pass in by names
+		b. Use positional params. When you use positional params, you need to add "positionalParams" property as a static variable in your component class. If you want to accept an arbitrary number of parameters, just set "positionalParams: 'params'".
+
+	(4)	Wrapping content in a component
+		a. Use component in block form and tell Ember where the block content should be rendered using the {yield}
+		b. Sharing component data with its Wrapped content "Contextual components" (Not understand well)
+
+	(5)	Customizing a Component's Element (Not understand well)
+
+	(6)	Using Block Params
+
+	(7)	Handling Events
+
+	(8)	Triggering Changes with actions
+		a. Component uses actions to communicate with its parent. 
+
+
+4. Controller
+
+	(1)	A Controller is routable object which receives a single property from the Route – model – which is the return value of the Route's model() method.
+
+
+5. Routing
+
+	(1) Define your routes
+		a. Basic route
+		b. Nested routes
+		c. The application route
+		d. Index routes
+
+	(2)	Specifying a Route's model
+		a. In Ember, functions that automatically run during rendering or setup are commonly referred to as "hooks". When a user first visits the /favorite-posts route, the model hook in app/routes/favorite-posts.js will automatically run.
+
+		b. model hooks:
+			(a) Template can access the model's return data through "this.model".
+			(b) Most common return data for model hook is a promise. Therefore, model hook is great for making API requests
+
+		c. Use model hook
+			(a) Behind the scenes, what is happening is that the route's controller receives the results of the model hook, and makes those results available to the template. Your app may not have a controller file for the route, but the behavior is the same regardless.
+
+		d. Multiple Models
+
+		e. Dynamic Models
+
+		f. Reusing route context
+
+		g. Debug models
+
+	(3)	Rendering a template
+		a. Each template will be rendered into the {{outlet}} of its parent route's template. For example, the posts.new route will render its template into the posts.hbs's {{outlet}}, and the posts route will render its template into the application.hbs's {{outlet}}.
+
+	(4)	Redirecting
+
+	(5)	Preventing and retrying transitions
+
+	(6)	Loading/Error Substates
+
+	(7)	Query parameters
+		a. Specifying Query Parameters
+		b. LinkTo component
+		c. transitionTo
+		d. Opting into a full transition
+		e. Update URL with replaceState instead
+		f. Map a controller's property to a different query param key
+
+	(8)	Asynchronouse Routing
+
+
+6. Ember data models
+	(1)	Models are objects that represent the underlying data that your application presents to the user.
+
+
+	(2)	Models tend to be persistent. That means the user does not expect model data to be lost when they close their browser window. 
+
+	(3) Store: Ember Data gives you a single store that is the central repository of models in your application. Routes and their corresponding controllers can ask the store for models, and the store is responsible for knowing how to fetch them.
+	Both routes and their corresponding controllers have access to this shared store; when they need to display or modify a model, they first ask the store for it.
+
+	(4)	Models: in Ember Data, each model is represented by a subclass of Model that defines the attributes, relationships, and behavior of the data that you present to the user. Models don't have any data themselves, they define the attributes, relationships and behavior of specific instances, which are called records.
+
+	(5)	Records: A record is an instance of a model that contains data loaded from a server. Your application can also create new records and save them back to the server. A record is uniquely identified by its model type and ID.
+
+	(6)	Adaptor: An adapter is an object that translates requests from Ember (such as "find the user with an ID of 1") into requests to a server. Whenever your app asks the store for a record that it doesn't have cached, it will ask the adapter for it. If you change a record and save it, the store will hand the record to the adapter to send the appropriate data to your server and confirm that the save was successful.
+
+	(7) Caching: The store will automatically cache records for you. If a record had already been loaded, asking for it a second time will always return the same object instance. This minimizes the number of round-trips to the server, and allows your application to render its UI to the user as fast as possible. This feature—always returning the same record object, no matter how many times you look it up—is sometimes called an identity map.
+	One downside to returning a cached record is you may find the state of the data has changed since it was first loaded into the store's identity map. In order to prevent this stale data from being a problem for long, Ember Data will automatically make a request in the background each time a cached record is returned from the store. When the new data comes in, the record is updated, and if there have been changes to the record since the initial render, the template is re-rendered with the new information.
+
+	(8)	Architecture overview
+
+		a. Defining Models
+			A model is a class that defines the properties and behavior of the data that you present to the user.
+
+			(a)	Define attributes
+				Transforms: coerce database data into JavaScript data type.
+				Custom transforms: A transform has two functions: serialize and deserialize. Deserialization converts a value to a format that the client expects. Serialization does the reverse and converts a value to the format expected by the persistence layer.
+				Options: set default value for attributes.
+				Read-only Attributes: define these attributes using DS.attr() directly.
+
+			(b) Finding records. Functions return a promise.
+				store.findAll() returns a DS.PromiseArray that fulfills to a DS.RecordArray and store.peekAll directly returns a DS.RecordArray. It's important to note that DS.RecordArray is not a JavaScript array, it's an object that implements MutableArray. This is important because, for example, if you want to retrieve records by index, the [] notation will not work--you'll have to use objectAt(index) instead.
+
+			(c) Creating, Updating and Deleting
+
+			(d)	Relationships. What is a inverse?
+
+			(e)	Pushing records into the store
+
+			(f) Handling Metadata
+
+			(g) Customizing Adapters
+
+			(h) Customizing Serializers
+
+7. Addons and Dependencies
+	(1)	Addons: Addons are JavaScript packages that integrate with Ember. For example, ember-cli-sass is an addon that allows you to use SASS/SCSS in your applications.
+
+
+
+yoember tutorial
+
+Lesson 1
+
+1. Add navigation
+	(1) link-to helper
+		The {{#link-to}}{{/link-to}} helps to create links. In this case we use as a “block helper”. The first parameter is the route name (index). Inside the block goes the label of the link. link-to uses <a> tag as default, but you can set up a different tag with the tagName property. 
+
+	(2)	outlet helper
+		The outlet helper is a general helper, a placeholder, where deeper level content will be inserted. The outlet in application.hbs means that almost all content from other pages will appear inside this section. For this reason, application.hbs is a good place to determine the main structure of our website. In our case we have a container div, a navigation bar, and the real content.
+
+	(3)	Create a new About page
+
+Lesson 2 Coming soon homepage with an email input box
+
+	(1)	Controller for index page
+		Create a controller to manipulate if the request button is disabled.
+
+	(2)	Computed properties and observers
+		Old syntax: use function(){}.property(PROPERTIES THAT NEEDS TO OBSERVE)
+		New syntax: Ember.computed(PROPERTY, PROPERTY, function(){})
+		The computed() function could have more parameters. The first parameters are always variables/properties in string format; what we would like to use inside our function. The last parameter is a function(). Inside this function we will have access to the properties with this.get() or from Ember v3.1 just simply this.propertyName. 
+
+		Here we change input tag to use curly braces to wrap the input. We use "value" to specify which variable we want to use to store the user input. Here we use "value=emailAddress"
+
+		The difference between computed properties and observers. Observers will be called everytime the properties change. Computed properties only change when you use that property.
+
+		Write isDisabled property using computed property.
+	(3)	There are many predefined computed properties functions such as "empty()" and "match()", just import them from "@ember/object/computed" and use them directly.
+
+	(4)	Adding an action to the button
+
+	(5)	Use {{#if}}{{/if}} to conditionally show response message
+
+
+Lesson 3 Our first Ember.js model
+
+	1. Create an invitation model for saving email.
+
+	2. Setup a server on Firebase
+
+	3. Create an Admin page
+
+	4. CRUD interface for libraries
+		(1) There is a built-in Ember.js action (event) called willTransition that is called when you leave a page (route). In our case, we use this action to reset the model if we haven’t saved it in the database yet.
+
+		(2) As you can see, we can access the controller from the route handler using this.controller, however we don’t have a real controller file for this route (/libraries/new.js). Ember.js’s dynamic code generation feature automatically creates controllers and route handlers for each route. They exists in memory. In this example, the model property exists in this “virtual” controller and in our template, so we can still “destroy” it. Using rollbackAttributes() is cleaner. It destroys the record automatically if it is new.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
