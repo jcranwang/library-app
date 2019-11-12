@@ -1,0 +1,23 @@
+<div class="admin-contacts">
+  <h2>Contacts</h2>
+  <br>
+  <br>
+  <table class="admin-contacts__table">
+    <thead>
+      <th>ID</th>
+      <th>E-mail</th>
+      <th>Message</th>
+      <th>Operation</th>
+    </thead>
+    <tbody>
+      {{#each model as |contact|}}
+      <tr>
+        <td>{{contact.id}}</td>
+        <td>{{contact.email}}</td>
+        <td>{{contact.message}}</td>
+        <td><button class="admin-contacts__delete-btn" {{action "deleteContact" contact}}>Delete</button></td>
+      </tr>
+      {{/each}}
+    </tbody>
+  </table>
+</div>

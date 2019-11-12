@@ -44,6 +44,7 @@
 
   &__library-collection {
     display: grid;
+    grid-gap: 2rem;
     grid-template-columns: repeat(auto-fill, minmax(30rem, 1fr));
   }
 
@@ -72,7 +73,42 @@
     padding: 2rem 1rem;
     font-size: 1.3rem;
     line-height: 2;
+    border-bottom: 1px solid $dark-grey;
   }
+  
+  &__manage {
+    padding: 1rem;
+    text-align: right;
+  }
+
+  &__edit-btn {
+    margin-right: 1rem;
+    padding: 1rem;
+    background-color: $light-green;
+    color: #fff;
+    border-radius: 5px;
+    font-size: 1.4rem;
+    cursor: pointer;
+    
+    &:hover {
+      background-color: $dark-green;
+    }
+  }
+
+  &__delete-btn {
+    margin-right: 1rem;
+    padding: 1rem;
+    background-color: $light-red;
+    color: #fff;
+    border-radius: 5px;
+    font-size: 1.4rem;
+    cursor: pointer;
+    
+    &:hover {
+      background-color: $dark-red;
+    }
+  }
+  
 }
 
 .lib-form {

@@ -1,0 +1,42 @@
+.admin-contacts {
+  margin-top: 3rem;
+
+  h2 {
+    font-size: 3rem;
+    color: $light-black;
+  }
+
+  &__table {
+    width: 100%;
+    table-layout: fixed;
+    border: 2px solid $dark-grey;
+    border-collapse: collapse;
+
+    th,
+    td {
+      padding: 1rem;
+      border: 2px solid $dark-grey;
+      text-align: left;
+      font-size: 1.5rem;
+      color: $light-black;
+    }
+
+    tr:nth-child(odd) {
+      background-color: $light-grey;
+    }
+  }
+
+  &__delete-btn {
+    margin-right: 1rem;
+    padding: 1rem;
+    background-color: $light-red;
+    color: #fff;
+    border-radius: 5px;
+    font-size: 1.2rem;
+    cursor: pointer;
+
+    &:hover {
+      background-color: $dark-red;
+    }
+  }
+}

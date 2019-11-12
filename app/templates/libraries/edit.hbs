@@ -1,0 +1,20 @@
+<h3 class="libraries__form-title">Edit library</h3>
+<br>
+<br>
+<div class="lib-form">
+  <div class="lib-form__input-group">
+    <label class="lib-form__label">Name<sup>*</sup></label>
+    {{input class="lib-form__input" type="text" placeholder="The name of the library" value=model.name}}
+  </div>
+  <div class="lib-form__input-group">
+    <label class="lib-form__label">Address<sup>*</sup></label>
+    {{input class="lib-form__input" type="text" placeholder="The address of the library" value=model.address}}
+  </div>
+  <div class="lib-form__input-group">
+    <label class="lib-form__label">Phone<sup>*</sup></label>
+    {{input class="lib-form__input" type="text" placeholder="The phone number of the library" value=model.phone}}
+  </div>
+  <div class="lib-form__input-group">
+    <button class="lib-form__btn-create" {{action "saveLibrary" model}}>Save changes</button>
+  </div>
+</div>

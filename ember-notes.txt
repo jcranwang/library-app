@@ -223,6 +223,47 @@ Ember Notes
 	(1)	Addons: Addons are JavaScript packages that integrate with Ember. For example, ember-cli-sass is an addon that allows you to use SASS/SCSS in your applications.
 
 
+8. Applications and Instances
+	(1)	Applications and Instances
+		a. Every Ember application is represented by a class that extends Application. This class is used to declare and configure the many objects that make up your app.
+
+		b. As your application boots, it creates an ApplicationInstance that is used to manage its stateful aspects. This instance acts as the "owner" of objects instantiated for your app.
+
+		c. Essentially, the Application defines your application while the ApplicationInstance manages its state.
+
+	(2)	Dependency Injection
+		a. Factory Registrations
+
+
+	(3)	Initializers
+		Initializers provide an opportunity to configure your application as it boots.
+		There are two types of initializers: application initializers and application instance initializers.
+		Application initializers are run as your application boots, and provide the primary means to configure dependency injections in your application.
+		Application instance initializers are run as an application instance is loaded. They provide a way to configure the initial state of your application, as well as to set up dependency injections that are local to the application instance (e.g. A/B testing configurations).
+
+	(4)	Services
+		A Service is an Ember object that lives for the duration of the application, and can be made available in different parts of your application. Services are useful for features that require shared state or persistent connections.
+
+		Services are useful for features that require shared state or persistent connections. Example uses of services might include:
+
+			User/session authentication.
+			Geolocation.
+			WebSockets.
+			Server-sent events or notifications.
+			Server-backed API calls that may not fit Ember Data.
+			Third-party APIs.
+			Logging.
+
+
+		a. Accessing services
+			To access a service, you can inject it in any container-resolved object such as a component or another service using the inject function from the @ember/service module. There are two ways to use this function. You can either invoke it with no arguments, or you can pass it the registered name of the service. When no arguments are passed, the service is loaded based on the name of the variable key. 
+
+		b. Injected properties are lazy loaded; meaning the service will not be instantiated until the property is explicitly called. Once loaded, a service will persist until the application exits.
+
+	9. Route vs Controller
+		In Ember.js, controllers allow you to decorate your models with display logic. In general, your models will have properties that are saved to the server, while controllers will have properties that your app does not need to save to the server. Controller is where you define data binding to variables on your templates.
+		Make all model (store) and application state changes (transitions) in the route and use the controller to proxy the model and handle actions that do not change application state.
+
 
 yoember tutorial
 
@@ -271,7 +312,15 @@ Lesson 3 Our first Ember.js model
 		(1) There is a built-in Ember.js action (event) called willTransition that is called when you leave a page (route). In our case, we use this action to reset the model if we haven’t saved it in the database yet.
 
 		(2) As you can see, we can access the controller from the route handler using this.controller, however we don’t have a real controller file for this route (/libraries/new.js). Ember.js’s dynamic code generation feature automatically creates controllers and route handlers for each route. They exists in memory. In this example, the model property exists in this “virtual” controller and in our template, so we can still “destroy” it. Using rollbackAttributes() is cleaner. It destroys the record automatically if it is new.
+		Remember to add "return" statement in model() method
 
+		Template can only access controller variables and model properties. It cannot access variables in route file.
+
+
+Lesson 4 Add Delete, Edit button and Edit route
+
+
+Lesson 5 Cleaning up our templates with components
 
 
 

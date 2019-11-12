@@ -13,8 +13,8 @@
   <br>
   <br>
   <div class="home-page__input-row">
-    {{input type="email" class="home-page__textbox" value=emailAddress placeholder="Please type your email address"}}
-    <button class="home-page__btn" disabled={{isDisabled}} {{action "saveInvitation"}}>Request invitation</button>
+    {{input type="email" class="home-page__textbox" value=model.email placeholder="Please type your email address"}}
+    <button class="home-page__btn" disabled={{isDisabled}} {{action "saveNewInvitation" model}}>Request invitation</button>
   </div>
   {{#if responseMsg}}
   <div class="home-page__response">

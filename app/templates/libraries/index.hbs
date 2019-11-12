@@ -5,12 +5,18 @@
   <br>
   <br>
   <div class="libraries__library-collection">
+    {{#each model as |library|}}
     <div class="library">
-      <h4 class="library__title">Stephen King Collections</h4>
+      <h4 class="library__title">{{library.name}}</h4>
       <div class="library__description">
-        <span class="library__address">Address: 1408 Castle Rock Drive</span>
-        <span class="library__phone">Phone: 123456</span>
+        <span class="library__address">Address: {{library.address}}</span>
+        <span class="library__phone">Phone: {{library.phone}}</span>
+      </div>
+      <div class="library__manage">
+        {{#link-to "libraries.edit" library.id class="library__edit-btn" tagName="button"}}Edit{{/link-to}}
+        <button class="library__delete-btn" {{action "deleteLibrary" library}}>Delete</button>
       </div>
     </div>
+    {{/each}}
   </div>
 </div>

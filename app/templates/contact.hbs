@@ -7,26 +7,26 @@
   </div>
   <br>
   <br>
-  {{#unless showResponse}}
+  {{#unless model.showResponse}}
   <form action="#" class="contact__form">
     <div class="contact__email">
       <h3 class="contact__input-header">Your email address<sup>*</sup>:</h3>
-      {{input value=emailAddress type="email" class=(if isEmailValid "contact__input-box contact__input-box--valid" "contact__input-box") placeholder="Email address"}}
+      {{input value=model.email type="email" class=(if model.isEmailValid "contact__input-box contact__input-box--valid" "contact__input-box") placeholder="Email address"}}
     </div>
     <br>
     <div class="contact__message">
       <h3 class="contact__input-header">Your message<sup>*</sup>:</h3>
-      {{textarea value=userMsg class=(if isUserMsgValid "contact__input-box contact__input-box--valid" "contact__input-box") rows="10" cols="50"
+      {{textarea value=model.message class=(if model.isUserMsgValid "contact__input-box contact__input-box--valid" "contact__input-box") rows="10" cols="50"
       placeholder="Your message. (At least 5 characters)"}}
     </div>
     <br>
-    <button class="contact__send-btn" disabled={{isDisabled}} {{action "sendContactMsg"}}>Send</button>
+    <button class="contact__send-btn" disabled={{model.isDisabled}} {{action "saveNewContact" model}}>Send</button>
   </form>
   {{else}}
   <div class="contact__response">
     <h3 class="contact__response-head">Thank you! Your message is send.</h3>
-    <p>To: {{emailAddress}}</p>
-    <p>Message: {{userMsg}}</p>
+    <p>To: {{model.email}}</p>
+    <p>Message: {{model.message}}</p>
   </div>
   {{/unless}}
 </section>

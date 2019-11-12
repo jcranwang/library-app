@@ -6,12 +6,14 @@
     <thead>
       <th>ID</th>
       <th>E-mail</th>
+      <th>Operation</th>
     </thead>
     <tbody>
       {{#each model as |invitation|}}
         <tr>
           <td>{{invitation.id}}</td>
           <td>{{invitation.email}}</td>
+          <td><button class="admin-contacts__delete-btn" {{action "deleteInvitation" invitation}}>Delete</button></td>
         </tr>
       {{/each}}
     </tbody>
