@@ -109,6 +109,7 @@ Ember Notes
 	(3)	Passing properties to a component
 		a. Pass in by names
 		b. Use positional params. When you use positional params, you need to add "positionalParams" property as a static variable in your component class. If you want to accept an arbitrary number of parameters, just set "positionalParams: 'params'".
+		c. It is important to note that actions can only be passed from a controller or another component. 
 
 	(4)	Wrapping content in a component
 		a. Use component in block form and tell Ember where the block content should be rendered using the {yield}
@@ -322,6 +323,13 @@ Lesson 4 Add Delete, Edit button and Edit route
 
 Lesson 5 Cleaning up our templates with components
 
+If you use curly brace helper, then it cannot recognise the curly braces inside it.
+If you use angle braces, it can recognise the curly braces
+
+To use the common template above, we have to do two things. First, we have to set the title and buttonLabel params in our controllers. Second, we have to let Ember know not to look for the default template based on the current route (e.x. in the route libraries/new, by default Ember looks for the template located at templates/libraries/new.hbs). To set controller params in a Route, we can use the setupController hook. For setting a non-default template location, we can use the renderTemplate hook.
+
+renderTemplate method in component, when use this.render(), do not add a "/" in the path.
+For example, this.render("libraries/form") instead of this.render("/libraries/form")
 
 
 

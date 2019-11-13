@@ -2,23 +2,29 @@
   <h1 class="home-page__title">
     {{pageTitle}}
   </h1>
-  <br>
-  <br>
+  <br />
+  <br />
   <p class="home-page__description">
     This is an example form for invitation. Start building your own application today, follow our free Ember.js
     Tutorial.
-    <br>
+    <br />
     Don't forget to check out other menu points as well. ;)
   </p>
-  <br>
-  <br>
+  <br />
+  <br />
   <div class="home-page__input-row">
     {{input type="email" class="home-page__textbox" value=model.email placeholder="Please type your email address"}}
-    <button class="home-page__btn" disabled={{isDisabled}} {{action "saveNewInvitation" model}}>Request invitation</button>
+    <button class="home-page__btn" disabled={{isDisabled}} {{action "saveNewInvitation" model}}>
+      Request
+      invitation
+    </button>
   </div>
   {{#if responseMsg}}
   <div class="home-page__response">
-    <p>Thank you! We saved your email address: {{responseMsg}}</p>
+    <p>
+      Thank you! We saved your email address:
+      {{responseMsg}}
+    </p>
   </div>
   {{/if}}
 </main>

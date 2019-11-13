@@ -6,17 +6,10 @@
   <br>
   <div class="libraries__library-collection">
     {{#each model as |library|}}
-    <div class="library">
-      <h4 class="library__title">{{library.name}}</h4>
-      <div class="library__description">
-        <span class="library__address">Address: {{library.address}}</span>
-        <span class="library__phone">Phone: {{library.phone}}</span>
-      </div>
-      <div class="library__manage">
+      {{#library-item item=library}}
         {{#link-to "libraries.edit" library.id class="library__edit-btn" tagName="button"}}Edit{{/link-to}}
         <button class="library__delete-btn" {{action "deleteLibrary" library}}>Delete</button>
-      </div>
-    </div>
+      {{/library-item}}
     {{/each}}
   </div>
 </div>

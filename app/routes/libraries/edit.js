@@ -5,8 +5,18 @@ export default Route.extend({
     return this.store.findRecord("library", params.library_id);
   },
 
+  setupController(controller, model) {
+    this._super(controller, model);
+    controller.set("title", "Edit a library");
+    controller.set("buttonLabel", "Save changes");
+  },
+
+  renderTemplate() {
+    this.render("libraries/form");
+  },
+
   actions: {
-    saveLibrary(editLibrary) {
+    saveNewLibrary(editLibrary) {
       editLibrary.save().then(() => this.transitionTo("libraries"));
     },
 
