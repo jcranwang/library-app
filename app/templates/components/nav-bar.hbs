@@ -1,0 +1,25 @@
+<nav class="nav-bar">
+  <div class="nav-bar__logo">
+    {{#link-to "index" class="nav-bar__brand"}}
+    Library App
+    {{/link-to}}
+  </div>
+  <div class="nav-bar__main">
+    <ul class="nav-bar__list">
+      {{#nav-link-to "index" class="nav-bar__list-item nav-bar__list-item--selected"}}Home{{/nav-link-to}}
+      {{#nav-link-to "libraries" class="nav-bar__list-item"}}Libraries{{/nav-link-to}}
+      {{#nav-link-to "index" class="nav-bar__list-item"}}Authors{{/nav-link-to}}
+      {{#nav-link-to "index" class="nav-bar__list-item"}}Books{{/nav-link-to}}
+      {{#nav-link-to "about" class="nav-bar__list-item"}}About{{/nav-link-to}}
+      {{#nav-link-to "contact" class="nav-bar__list-item"}}Contact{{/nav-link-to}}
+      <li class="nav-bar__list-item nav-bar__list-item--dropdown"><a href="#">Admin <span
+            class="nav-bar__drop-arrow">&#x25BC;</span></a>
+        <ul class="nav-bar__dropdown">
+          {{#nav-link-to "admin.invitations" class="nav-bar__dropdown-item"}}Invitations{{/nav-link-to}}
+          {{#nav-link-to "admin.contacts" class="nav-bar__dropdown-item"}}Contacts{{/nav-link-to}}
+          {{#nav-link-to "index" class="nav-bar__dropdown-item"}}Seeder{{/nav-link-to}}
+        </ul>
+      </li>
+    </ul>
+  </div>
+</nav>
